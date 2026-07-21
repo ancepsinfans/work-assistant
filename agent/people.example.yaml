@@ -1,0 +1,24 @@
+people:
+  - name: Alex Chen
+    nickname: Alex
+    email: alex.chen@example.com
+    role: Engineering Lead
+    slack_id: U0123456789
+    team: Engineering
+    trajectory:
+      text: Example trajectory — replace with real observations from your deployment.
+      basis: presence
+      confidence: low
+      last_updated: "2026-01-01"
+
+  - name: Jordan Lee
+    nickname: Jordan
+    email: jordan.lee@example.com
+    role: Designer
+    slack_id: U9876543210
+    team: Product
+    trajectory:
+      text: Another example entry. Copy this file to people.yaml and populate your org chart.
+      basis: absence
+      confidence: low
+      last_updated: "2026-01-01"

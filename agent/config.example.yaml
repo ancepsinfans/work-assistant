@@ -1,0 +1,86 @@
+# Example configuration for Work Assistant.
+# Copy to config.yaml and fill in your values:
+#   cp config.example.yaml config.yaml
+
+assistant:
+  name: "Work Assistant"
+  id: "work-assistant"
+  role_description: "Product Manager"
+
+# LLM backend: anthropic | openai | ollama
+llm:
+  provider: anthropic
+  model: claude-sonnet-4-20250514
+  api_key_env: ANTHROPIC_API_KEY   # or set llm.api_key directly (not recommended)
+  temperature: 0.4
+  max_tokens: 20000
+  max_chars_per_source: 12000
+  # Ollama-only:
+  # provider: ollama
+  # model: llama3.1:latest
+  # base_url: http://localhost:11434
+
+templates:
+  directory: templates
+  system_prompt: templates/system_prompt.md
+  absence_prompt: templates/absence_prompt.md
+  ask_prompt: templates/ask_prompt.md
+  domain_rules: templates/domain/jira_rules.md
+
+sources:
+  slack:
+    enabled: true
+    token: "xoxc-..."
+    cookie_d: "xoxd-..."
+    workspace: "your-workspace"
+    priority_channels: []
+    include_dms: true
+    include_mentions: true
+
+  gmail:
+    enabled: true
+    credentials_path: ".config/agent/gmail_credentials.json"
+    token_path: ".config/agent/gmail_token.json"
+    query_filter: "is:unread -category:promotions -category:social"
+    max_results: 25
+
+  jira:
+    enabled: true
+    email: "you@company.com"
+    token: "YOUR_JIRA_API_TOKEN"
+    base_url: "https://your-org.atlassian.net"
+    jql_filter: "assignee = currentUser() OR watcher = currentUser()"
+
+  confluence:
+    enabled: true
+    email: "you@company.com"
+    token: "YOUR_CONFLUENCE_API_TOKEN"
+    base_url: "https://your-org.atlassian.net"
+    cql_filter: "watcher = currentUser() OR creator = currentUser()"
+
+  meetings:
+    enabled: true
+    credentials_path: ".config/agent/gmail_credentials.json"
+    token_path: ".config/agent/meetings_token.json"
+    max_results: 20
+
+  obsidian:
+    enabled: true
+    vault_path: "~/Obsidian/WorkVault"
+    watch_folders:
+      - "inbox"
+      - "daily"
+    recency_minutes: 160
+    memory_folder: "agent-memory"
+    memory_extra_files: []
+
+  taskflow:
+    enabled: false
+    base_url: "http://localhost:5174/api"
+    statuses: ["inbox", "today"]
+
+agent:
+  state_db: "~/.config/work-assistant/state.db"
+  log_file: "~/.config/work-assistant/agent.log"
+  timezone: "America/New_York"
+  max_chars_per_source: 8000

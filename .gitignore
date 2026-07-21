@@ -1,0 +1,16 @@
+# Work Assistant — ignore local secrets and runtime state
+agent/config.yaml
+agent/.config/
+agent/.env
+agent/.env.ps1
+agent/people.yaml
+agent/.venv/
+**/__pycache__/
+*.py[cod]
+*.db
+.env
+.env.*
+.DS_Store
+*.log
+agent/probe.ipynb
+agent/audit_sources.ipynb
